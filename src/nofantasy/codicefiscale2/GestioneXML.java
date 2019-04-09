@@ -20,6 +20,7 @@ public class GestioneXML {
 
 	public void letturaCF() {
 		ArrayList<String> codiciLetti = new ArrayList<String>();
+		String lastTag = "";
 		try {
 			xmlif = XMLInputFactory.newInstance();
 			xmlr = xmlif.createXMLStreamReader(pathCF, new FileInputStream(pathCF));
@@ -31,24 +32,26 @@ public class GestioneXML {
 		try {
 			while (xmlr.hasNext()) { // continua a leggere finché ha eventi a disposizione
 				switch (xmlr.getEventType()) { // switch sul tipo di evento
-					case XMLStreamConstants.START_DOCUMENT: // inizio del documento: stampa che inizia il documento
+					case XMLStreamConstants.START_DOCUMENT: // inizio del documento 
 						
 						break;
 					case XMLStreamConstants.START_ELEMENT:
-						for (int i = 0; i < xmlr.getAttributeCount(); i++)
-							if("codice".equals(xmlr.getAttributeLocalName(i))) {
-								codiciLetti.add(xmlr.getAttributeValue(i));
-							}
+						
+						lastTag = xmlr.getLocalName();//passo ad una variabile d'appoggio l'ultima tag che ho letto
+						
 						break;
-					case XMLStreamConstants.END_ELEMENT: // fine di un elemento: stampa il nome del tag chiuso
-						System.out.println("END-Tag " + xmlr.getLocalName()); 
+					case XMLStreamConstants.END_ELEMENT: // fine di un elemento 
+						
 						break;
 					case XMLStreamConstants.COMMENT:
-						System.out.println("// commento " + xmlr.getText()); 
-						break; // commento: ne stampa il contenuto
+						
+						break;  
 					case XMLStreamConstants.CHARACTERS: // content all’interno di un elemento: stampa il testo
 						if (xmlr.getText().trim().length() > 0) // controlla se il testo non contiene solo spazi
-							System.out.println("-> " + xmlr.getText());
+							
+							if (lastTag.equals("codice")) {//se l'ultima tag che ho letto è "codice" prendo il testo
+								codiciLetti.add(xmlr.getText());
+							}
 						break;
 					}
 					xmlr.next();
@@ -61,6 +64,8 @@ public class GestioneXML {
 	}
 	
 	public void letturaPersona() {
+		
+		
 		codici.aggiungiPersona(persona);
 	}
 
