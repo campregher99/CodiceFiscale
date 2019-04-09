@@ -119,14 +119,13 @@ public class GestioneXML {
 						if (lastTag.equals("data_nascita")) {//se l'ultima tag che ho letto è "data_nascita" prendo il testo
 							data = xmlr.getText();
 							lastTag = "";//resetto la variabile d'appoggio
-						
+						}
 						break;
 					}
 				
 				
 					xmlr.next();
 				}
-			}
 		}catch (Exception e){
 			System.out.println("Errore durante la lettura del file: ");
 			System.out.println(e.getMessage());
