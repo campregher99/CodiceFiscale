@@ -294,6 +294,7 @@ public class Persona {
 			return INCREABILE;
 		}
 
+		//aggiunta codice comune
 		newCF += this.cmn;
 		
 		//calcolo carattere di controllo
