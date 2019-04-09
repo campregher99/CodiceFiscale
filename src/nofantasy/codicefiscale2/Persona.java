@@ -295,7 +295,8 @@ public class Persona {
 		}
 
 		newCF += this.cmn;
-
+		
+		//calcolo carattere di controllo
 		for (i = 0; i < newCF.length(); i++) {
 			if (i % 2 == 0) {
 				switch (newCF.charAt(i)) {
@@ -409,9 +410,14 @@ public class Persona {
 					break;
 				}
 			} else {
-				pari += newCF.charAt(i);
+				if (newCF.charAt(i) < 60) {
+					pari += newCF.charAt(i) - 48;
+				} else {
+					pari += newCF.charAt(i) - 65;
+				}
 			}
 		}
+		newCF += (char) (((pari + dispari) % 26) + 65);
 
 		return newCF;
 	}
