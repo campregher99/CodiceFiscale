@@ -7,17 +7,19 @@ public class GestioneXML {
 	private String pathInputPersone;
 	private String pathComuni;
 	private String pathCF;
+	private GestioneCodici codici;
 
-	public ArrayList<String> letturaCF() {
-		return;
+	public void letturaCF() {
+		
+		codici = new GestioneCodici(newCodici);
 	}
 
 	public String ricercaComune(String comune) {
 		return "";
 	}
 
-	public ArrayList<Persona> letturaPersona() {
-		return;
+	public void letturaPersona() {
+		codici.aggiungiPersona(persona);
 	}
 
 	public boolean sethPathInputPersona(String Path) {
