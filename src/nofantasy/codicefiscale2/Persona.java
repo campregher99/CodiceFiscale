@@ -124,6 +124,17 @@ public class Persona {
 			break;
 		case 2:
 			newCF += 'B';
+			if (Integer.valueOf(this.dataDiNascita.substring(2, 3)) % 4 != 0) {
+				if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 28
+						&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+					newCF += this.dataDiNascita.substring(8, 9);
+				}
+			} else {
+				if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 29
+						&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+					newCF += this.dataDiNascita.substring(8, 9);
+				}
+			}
 			break;
 		case 3:
 			newCF += 'C';
@@ -134,7 +145,10 @@ public class Persona {
 			break;
 		case 4:
 			newCF += 'D';
-			
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 30
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+				newCF += this.dataDiNascita.substring(8, 9);
+			}
 			break;
 		case 5:
 			newCF += 'E';
@@ -145,6 +159,10 @@ public class Persona {
 			break;
 		case 6:
 			newCF += 'F';
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 30
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+				newCF += this.dataDiNascita.substring(8, 9);
+			}
 			break;
 		case 7:
 			newCF += 'G';
@@ -162,6 +180,10 @@ public class Persona {
 			break;
 		case 9:
 			newCF += 'I';
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 30
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+				newCF += this.dataDiNascita.substring(8, 9);
+			}
 			break;
 		case 10:
 			newCF += 'L';
@@ -172,6 +194,10 @@ public class Persona {
 			break;
 		case 11:
 			newCF += 'M';
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 30
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+				newCF += this.dataDiNascita.substring(8, 9);
+			}
 			break;
 		case 12:
 			newCF += 'N';
@@ -181,10 +207,11 @@ public class Persona {
 			}
 			break;
 		default:
-
+			//eventualità di errore
 			break;
 		}
-
+		
+		
 		newCF = "";
 		return newCF;
 	}
