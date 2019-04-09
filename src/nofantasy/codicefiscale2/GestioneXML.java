@@ -14,7 +14,9 @@ public class GestioneXML {
 	private String pathInputPersone;
 	private String pathComuni;
 	private String pathCF;
-	private GestioneCodici codici;		
+	private GestioneCodici codici;	
+	private XMLInputFactory xmlifComuni = null;
+	private XMLStreamReader xmlrComuni = null;
 	private XMLInputFactory xmlif = null;
 	private XMLStreamReader xmlr = null;
 
@@ -133,7 +135,53 @@ public class GestioneXML {
 	}
 
 	private String ricercaComune(String comune) {
-		return "";
+		String nomeComune = "";
+		String lastTag = "";
+		try {
+			xmlifComuni = XMLInputFactory.newInstance();
+			xmlrComuni = xmlifComuni.createXMLStreamReader(pathComuni, new FileInputStream(pathComuni));
+		} catch (Exception e) {
+			System.out.println("Errore nell'inizializzazione del reader:");
+			System.out.println(e.getMessage());
+		}
+		
+		try {
+			while (xmlrComuni.hasNext()) { // continua a leggere finché ha eventi a disposizione
+				switch (xmlrComuni.getEventType()) { 
+					case XMLStreamConstants.START_DOCUMENT: 
+						
+						break;
+					case XMLStreamConstants.START_ELEMENT:
+						
+						lastTag = xmlrComuni.getLocalName();//passo ad una variabile d'appoggio l'ultima tag che ho letto
+
+						break;
+					case XMLStreamConstants.END_ELEMENT:
+						if (xmlrComuni.getLocalName().equals("persona")) {
+							
+						}
+						break;
+					case XMLStreamConstants.COMMENT:
+						
+						break;  
+					case XMLStreamConstants.CHARACTERS:
+						
+						if (lastTag.equals("nome")) {//se l'ultima tag che ho letto è "nome" prendo il testo
+							nomeComune = xmlrComuni.getText();
+							lastTag = "";//resetto la variabile d'appoggio
+						}
+						if (lastTag.equals("codice") && nomeComune.equals(comune)) {//se l'ultima tag che ho letto è "nome" prendo il testo
+							return xmlrComuni.getText();
+						}
+						break;
+					}
+					xmlrComuni.next();
+				}
+		}catch (Exception e){
+			System.out.println("Errore durante la lettura del file: ");
+			System.out.println(e.getMessage());
+		}
+		return "Comune non trovato";
 	}
 
 	public boolean sethPathInputPersona(String path) {
