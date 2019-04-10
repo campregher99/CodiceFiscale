@@ -220,8 +220,8 @@ public class GestioneXML {
 		return true;
 	}
 
-	public void generaOutput(ArrayList<String> persone, ArrayList<String> cFInvalidi, ArrayList<String> cFSpaiati) {
-
+	public void generaOutput(//eliminati perchè li può prendere da solo da codici) {
+			
 	}
 
 }
