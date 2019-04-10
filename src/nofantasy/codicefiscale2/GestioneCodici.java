@@ -21,11 +21,22 @@ public class GestioneCodici {
 		}
 	}
 	
+	public ArrayList<String> getCodiciFiscaliInvalidi() {
+		return codiciFiscaliInvalidi;
+	}
+	
+	public ArrayList<Persona> getPersone() {
+		return persone;
+	}
+	public ArrayList<String> getCodiciFiscaliSpaiati() {
+		return codiciFiscaliSpaiati;
+	}
+	
 	public void aggiungiPersona(Persona newPersona) {
-		if(!(controlloCF(newPersona.getcF()))) {
+		if(!(controlloCF(newPersona.getCF()))) {
 			newPersona.setCF(ASSENTE);
 		}else {
-			codiciFiscaliSpaiati.remove(newPersona.getcF());
+			codiciFiscaliSpaiati.remove(newPersona.getCF());
 		}
 		persone.add(newPersona);		
 	}
@@ -134,126 +145,126 @@ public class GestioneCodici {
 		//controllo carattere di controllo
 		//calcolo carattere di controllo
 		int i, dispari = 0, pari =0;
-	    for (i = 0; i < codice.length()-1; i++) {
-	      if (i % 2 == 0) {
-	        switch (codice.charAt(i)) {
-	        case '0':
-	          dispari += 1;
-	          break;
-	        case '1':
-	          dispari += 0;
-	          break;
-	        case '2':
-	          dispari += 5;
-	          break;
-	        case '3':
-	          dispari += 7;
-	          break;
-	        case '4':
-	          dispari += 9;
-	          break;
-	        case '5':
-	          dispari += 13;
-	          break;
-	        case '6':
-	          dispari += 15;
-	          break;
-	        case '7':
-	          dispari += 17;
-	          break;
-	        case '8':
-	          dispari += 19;
-	          break;
-	        case '9':
-	          dispari += 21;
-	          break;
-	        case 'A':
-	          dispari += 1;
-	          break;
-	        case 'B':
-	          dispari += 0;
-	          break;
-	        case 'C':
-	          dispari += 5;
-	          break;
-	        case 'D':
-	          dispari += 7;
-	          break;
-	        case 'E':
-	          dispari += 9;
-	          break;
-	        case 'F':
-	          dispari += 13;
-	          break;
-	        case 'G':
-	          dispari += 15;
-	          break;
-	        case 'H':
-	          dispari += 17;
-	          break;
-	        case 'I':
-	          dispari += 19;
-	          break;
-	        case 'J':
-	          dispari += 21;
-	          break;
-	        case 'K':
-	          dispari += 2;
-	          break;
-	        case 'L':
-	          dispari += 4;
-	          break;
-	        case 'M':
-	          dispari += 18;
-	          break;
-	        case 'N':
-	          dispari += 20;
-	          break;
-	        case 'O':
-	          dispari += 11;
-	          break;
-	        case 'P':
-	          dispari += 3;
-	          break;
-	        case 'Q':
-	          dispari += 6;
-	          break;
-	        case 'R':
-	          dispari += 8;
-	          break;
-	        case 'S':
-	          dispari += 12;
-	          break;
-	        case 'T':
-	          dispari += 14;
-	          break;
-	        case 'U':
-	          dispari += 16;
-	          break;
-	        case 'V':
-	          dispari += 10;
-	          break;
-	        case 'W':
-	          dispari += 22;
-	          break;
-	        case 'X':
-	          dispari += 25;
-	          break;
-	        case 'Y':
-	          dispari += 24;
-	          break;
-	        case 'Z':
-	          dispari += 23;
-	          break;
-	        }
-	      } else {
-	        if (codice.charAt(i) < 60) {
-	          pari += codice.charAt(i) - 48;
-	        } else {
-	          pari += codice.charAt(i) - 65;
-	        }
-	      }
-	    }
+		for (i = 0; i < codice.length()-1; i++) {
+			if (i % 2 == 0) {
+				switch (codice.charAt(i)) {
+				case '0':
+					dispari += 1;
+					break;
+				case '1':
+					dispari += 0;
+					break;
+				case '2':
+					dispari += 5;
+					break;
+				case '3':
+					dispari += 7;
+					break;
+				case '4':
+					dispari += 9;
+					break;
+				case '5':
+					dispari += 13;
+					break;
+				case '6':
+					dispari += 15;
+					break;
+				case '7':
+					dispari += 17;
+					break;
+				case '8':
+					dispari += 19;
+					break;
+				case '9':
+					dispari += 21;
+					break;
+				case 'A':
+					dispari += 1;
+					break;
+				case 'B':
+					dispari += 0;
+					break;
+				case 'C':
+					dispari += 5;
+					break;
+				case 'D':
+					dispari += 7;
+					break;
+				case 'E':
+					dispari += 9;
+					break;
+				case 'F':
+					dispari += 13;
+					break;
+				case 'G':
+					dispari += 15;
+					break;
+				case 'H':
+					dispari += 17;
+					break;
+				case 'I':
+					dispari += 19;
+					break;
+				case 'J':
+					dispari += 21;
+					break;
+				case 'K':
+					dispari += 2;
+					break;
+				case 'L':
+					dispari += 4;
+					break;
+				case 'M':
+					dispari += 18;
+					break;
+				case 'N':
+					dispari += 20;
+					break;
+				case 'O':
+					dispari += 11;
+					break;
+				case 'P':
+					dispari += 3;
+					break;
+				case 'Q':
+					dispari += 6;
+					break;
+				case 'R':
+					dispari += 8;
+					break;
+				case 'S':
+					dispari += 12;
+					break;
+				case 'T':
+					dispari += 14;
+					break;
+				case 'U':
+					dispari += 16;
+					break;
+				case 'V':
+					dispari += 10;
+					break;
+				case 'W':
+					dispari += 22;
+					break;
+				case 'X':
+					dispari += 25;
+					break;
+				case 'Y':
+					dispari += 24;
+					break;
+				case 'Z':
+					dispari += 23;
+					break;
+				}
+			} else {
+				if (codice.charAt(i) < 60) {
+					pari += codice.charAt(i) - 48;
+				} else {
+					pari += codice.charAt(i) - 65;
+				}
+			}
+		}
 	    if(!(codice.charAt(15)== (((pari + dispari) % 26) + 65))) {
 	    	return false;
 	    }

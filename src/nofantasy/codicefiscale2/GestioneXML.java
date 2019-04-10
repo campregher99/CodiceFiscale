@@ -3,10 +3,13 @@ package nofantasy.codicefiscale2;
 import java.util.*;
 
 import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.XMLStreamWriter;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 
 public class GestioneXML {
@@ -19,6 +22,8 @@ public class GestioneXML {
 	private XMLStreamReader xmlrComuni = null;
 	private XMLInputFactory xmlif = null;
 	private XMLStreamReader xmlr = null;
+	private XMLOutputFactory xmlof = null;
+	private XMLStreamWriter xmlw = null;
 
 	public void letturaCF() {
 		ArrayList<String> codiciLetti = new ArrayList<String>();
@@ -27,7 +32,7 @@ public class GestioneXML {
 			xmlif = XMLInputFactory.newInstance();
 			xmlr = xmlif.createXMLStreamReader(pathCF, new FileInputStream(pathCF));
 		} catch (Exception e) {
-			System.out.println("Errore nell'inizializzazione del reader:");
+			System.out.println("Errore nell'inizializzazione del reader: " + pathCF);
 			System.out.println(e.getMessage());
 		}
 		
@@ -52,13 +57,14 @@ public class GestioneXML {
 						
 						if (lastTag.equals("codice")) {//se l'ultima tag che ho letto è "codice" prendo il testo
 							codiciLetti.add(xmlr.getText());
+							lastTag = "";//resetto la variabile d'appoggio
 						}
 						break;
 					}
 					xmlr.next();
 				}
 		}catch (Exception e){
-			System.out.println("Errore durante la lettura del file: ");
+			System.out.println("Errore durante la lettura del file: " + pathCF);
 			System.out.println(e.getMessage());
 		}
 		codici = new GestioneCodici(codiciLetti);
@@ -76,7 +82,7 @@ public class GestioneXML {
 			xmlif = XMLInputFactory.newInstance();
 			xmlr = xmlif.createXMLStreamReader(pathInputPersone, new FileInputStream(pathInputPersone));
 		} catch (Exception e) {
-			System.out.println("Errore nell'inizializzazione del reader:");
+			System.out.println("Errore nell'inizializzazione del reader:" + pathInputPersone);
 			System.out.println(e.getMessage());
 		}
 		
@@ -129,7 +135,7 @@ public class GestioneXML {
 					xmlr.next();
 				}
 		}catch (Exception e){
-			System.out.println("Errore durante la lettura del file: ");
+			System.out.println("Errore durante la lettura del file: " + pathInputPersone);
 			System.out.println(e.getMessage());
 		}
 	}
@@ -141,7 +147,7 @@ public class GestioneXML {
 			xmlifComuni = XMLInputFactory.newInstance();
 			xmlrComuni = xmlifComuni.createXMLStreamReader(pathComuni, new FileInputStream(pathComuni));
 		} catch (Exception e) {
-			System.out.println("Errore nell'inizializzazione del reader:");
+			System.out.println("Errore nell'inizializzazione del reader: " + pathComuni);
 			System.out.println(e.getMessage());
 		}
 		
@@ -178,50 +184,91 @@ public class GestioneXML {
 					xmlrComuni.next();
 				}
 		}catch (Exception e){
-			System.out.println("Errore durante la lettura del file: ");
+			System.out.println("Errore durante la lettura del file: " + pathComuni);
 			System.out.println(e.getMessage());
 		}
 		return "Comune non trovato";
 	}
 
-	public boolean sethPathInputPersona(String path) {
-		try {
-			xmlif = XMLInputFactory.newInstance();
-			xmlr = xmlif.createXMLStreamReader(path, new FileInputStream(path));
-			pathInputPersone = path;
-		} catch (Exception e) {
-			System.out.println("Non è stato possibile trovare il file");
-			System.out.println(e.getMessage());
-		}
-		return true;
+	public void setPathInputPersona(String path) {
+		pathInputPersone = path;
 	}
 
-	public boolean sethPathComuni(String path) {
-		try {
-			xmlif = XMLInputFactory.newInstance();
-			xmlr = xmlif.createXMLStreamReader(path, new FileInputStream(path));
-			pathComuni = path;
-		} catch (Exception e) {
-			System.out.println("Non è stato possibile trovare il file");
-			System.out.println(e.getMessage());
-		}
-		return true;
+	public void setPathComuni(String path) {
+		pathComuni = path;
 	}
 
-	public boolean sethPathCF(String path) {
-		try {
-			xmlif = XMLInputFactory.newInstance();
-			xmlr = xmlif.createXMLStreamReader(path, new FileInputStream(path));
-			pathCF = path;
-		} catch (Exception e) {
-			System.out.println("Non è stato possibile trovare il file");
-			System.out.println(e.getMessage());
-		}
-		return true;
+	public void setPathCF(String path) {
+		pathCF = path;
 	}
 
 	public void generaOutput() {//eliminati perchè li può prendere da solo da codici
+		try {
+			xmlof = XMLOutputFactory.newInstance();
+			xmlw = xmlof.createXMLStreamWriter(new FileOutputStream("codiciPersone.xml"), "utf-8");
+			xmlw.writeStartDocument("utf-8", "1.0");
+		} catch (Exception e) {
+			System.out.println("Errore nell'inizializzazione del writer:");
+			System.out.println(e.getMessage());
+		}
+
+		try { 
+			xmlw.writeStartElement("output"); // apertura tag radice
+			xmlw.writeStartElement("persone");//apertura persone
+			xmlw.writeAttribute("numero", Integer.toString(codici.getPersone().size()));
+			for (int i = 0; i < codici.getPersone().size(); i++) {
+				xmlw.writeStartElement("persona");
+				xmlw.writeAttribute("id", Integer.toString(i));
+				xmlw.writeStartElement("nome");
+				xmlw.writeCharacters(codici.getPersone().get(i).getNome());
+				xmlw.writeEndElement();
+				xmlw.writeStartElement("cognome");
+				xmlw.writeCharacters(codici.getPersone().get(i).getCognome());
+				xmlw.writeEndElement();
+				xmlw.writeStartElement("sesso");
+				xmlw.writeCharacters(codici.getPersone().get(i).getSesso());
+				xmlw.writeEndElement();
+				xmlw.writeStartElement("comune_nascita");
+				xmlw.writeCharacters(codici.getPersone().get(i).getComune());
+				xmlw.writeEndElement();
+				xmlw.writeStartElement("data_nascita");
+				xmlw.writeCharacters(codici.getPersone().get(i).getDataDiNascita());
+				xmlw.writeEndElement();
+				xmlw.writeStartElement("codice_fiscale");
+				xmlw.writeCharacters(codici.getPersone().get(i).getCF());
+				xmlw.writeEndElement();
+				xmlw.writeEndElement();
+			}
+			xmlw.writeEndElement(); //chiudo persone
 			
+			xmlw.writeStartElement("codici");//apro codici
+			xmlw.writeStartElement("invalidi");//apro invalidi
+			xmlw.writeAttribute("numero", Integer.toString(codici.getCodiciFiscaliInvalidi().size()));
+			for (int i = 0; i < codici.getCodiciFiscaliInvalidi().size(); i++) {
+				xmlw.writeStartElement("codice");
+				xmlw.writeCharacters(codici.getCodiciFiscaliInvalidi().get(i));
+				xmlw.writeEndElement();
+			}
+			xmlw.writeEndElement();//chiudo invalidi
+			
+			xmlw.writeStartElement("spaiati");//apro spaiati
+			xmlw.writeAttribute("numero", Integer.toString(codici.getCodiciFiscaliSpaiati().size()));
+			for (int i = 0; i < codici.getCodiciFiscaliSpaiati().size(); i++) {
+				xmlw.writeStartElement("codice");
+				xmlw.writeCharacters(codici.getCodiciFiscaliSpaiati().get(i));
+				xmlw.writeEndElement();
+			}
+			xmlw.writeEndElement();//chiudo spaiati
+			xmlw.writeEndElement();//chiudo codici
+			
+			xmlw.writeEndElement();//chiudo output tag radice
+			xmlw.writeEndDocument(); // scrittura della fine del documento
+			xmlw.flush(); // svuota il buffer e procede alla scrittura
+			xmlw.close(); // chiusura
+		} catch (Exception e) { 
+			System.out.println("Errore nella scrittura");
+			System.out.println(e.getMessage());
+		}
 	}
 
 }

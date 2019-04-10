@@ -59,7 +59,7 @@ public class Persona {
 		return dataDiNascita;
 	}
 
-	public String getcF() {
+	public String getCF() {
 		return cF;
 	}
 
