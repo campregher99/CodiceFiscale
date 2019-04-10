@@ -220,7 +220,7 @@ public class GestioneXML {
 		return true;
 	}
 
-	public void generaOutput(//eliminati perchè li può prendere da solo da codici) {
+	public void generaOutput() {//eliminati perchè li può prendere da solo da codici
 			
 	}
 
