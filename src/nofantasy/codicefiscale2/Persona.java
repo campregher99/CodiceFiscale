@@ -84,7 +84,7 @@ public class Persona {
 							|| this.cognome.charAt(c - this.cognome.length()) == 'O'
 							|| this.cognome.charAt(c - this.cognome.length()) == 'U') {
 						i++;
-						newCF += this.cognome.charAt(c);
+						newCF += this.cognome.charAt(c - this.cognome.length());
 					}
 				} else {
 					return INCREABILE;
@@ -113,7 +113,7 @@ public class Persona {
 							|| this.nome.charAt(c - this.nome.length()) == 'O'
 							|| this.nome.charAt(c - this.nome.length()) == 'U') {
 						i++;
-						newCF += this.nome.charAt(c);
+						newCF += this.nome.charAt(c - this.nome.length());
 					}
 				} else {
 					return INCREABILE;
@@ -123,18 +123,18 @@ public class Persona {
 		}
 
 		// calcolo anno di nascita
-		newCF += this.dataDiNascita.substring(2, 3);
+		newCF += this.dataDiNascita.substring(2, 4);
 
 		// calcolo mese e conversione in lettera e calcolo giorno con controllo
-		switch (Integer.valueOf(this.dataDiNascita.substring(5, 6))) {
+		switch (Integer.valueOf(this.dataDiNascita.substring(5, 7))) {
 		case 1:
 			newCF += 'A';
-			if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 31
-					&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 31
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
 				if (this.sesso.charAt(0) == 'F') {
-					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 9)) + 40;
+					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
 				} else {
-					newCF += this.dataDiNascita.substring(8, 9);
+					newCF += this.dataDiNascita.substring(8, 10);
 				}
 
 			} else {
@@ -143,17 +143,17 @@ public class Persona {
 			break;
 		case 2:
 			newCF += 'B';
-			if (Integer.valueOf(this.dataDiNascita.substring(2, 3)) % 4 != 0) {
-				if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 28
-						&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
-					newCF += this.dataDiNascita.substring(8, 9);
+			if (Integer.valueOf(this.dataDiNascita.substring(2, 4)) % 4 != 0) {
+				if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 28
+						&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
+					newCF += this.dataDiNascita.substring(8, 10);
 				}
-			} else if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 29
-					&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+			} else if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 29
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
 				if (this.sesso.charAt(0) == 'F') {
-					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 9)) + 40;
+					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
 				} else {
-					newCF += this.dataDiNascita.substring(8, 9);
+					newCF += this.dataDiNascita.substring(8, 10);
 				}
 			} else {
 				return INCREABILE;
@@ -161,12 +161,12 @@ public class Persona {
 			break;
 		case 3:
 			newCF += 'C';
-			if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 31
-					&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 31
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
 				if (this.sesso.charAt(0) == 'F') {
-					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 9)) + 40;
+					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
 				} else {
-					newCF += this.dataDiNascita.substring(8, 9);
+					newCF += this.dataDiNascita.substring(8, 10);
 				}
 			} else {
 				return INCREABILE;
@@ -174,12 +174,12 @@ public class Persona {
 			break;
 		case 4:
 			newCF += 'D';
-			if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 30
-					&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 30
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
 				if (this.sesso.charAt(0) == 'F') {
-					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 9)) + 40;
+					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
 				} else {
-					newCF += this.dataDiNascita.substring(8, 9);
+					newCF += this.dataDiNascita.substring(8, 10);
 				}
 			} else {
 				return INCREABILE;
@@ -187,12 +187,12 @@ public class Persona {
 			break;
 		case 5:
 			newCF += 'E';
-			if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 31
-					&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 31
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
 				if (this.sesso.charAt(0) == 'F') {
-					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 9)) + 40;
+					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
 				} else {
-					newCF += this.dataDiNascita.substring(8, 9);
+					newCF += this.dataDiNascita.substring(8, 10);
 				}
 			} else {
 				return INCREABILE;
@@ -200,12 +200,12 @@ public class Persona {
 			break;
 		case 6:
 			newCF += 'F';
-			if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 30
-					&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 30
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
 				if (this.sesso.charAt(0) == 'F') {
-					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 9)) + 40;
+					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
 				} else {
-					newCF += this.dataDiNascita.substring(8, 9);
+					newCF += this.dataDiNascita.substring(8, 10);
 				}
 			} else {
 				return INCREABILE;
@@ -213,12 +213,12 @@ public class Persona {
 			break;
 		case 7:
 			newCF += 'G';
-			if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 31
-					&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 31
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
 				if (this.sesso.charAt(0) == 'F') {
-					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 9)) + 40;
+					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
 				} else {
-					newCF += this.dataDiNascita.substring(8, 9);
+					newCF += this.dataDiNascita.substring(8, 10);
 				}
 			} else {
 				return INCREABILE;
@@ -226,12 +226,12 @@ public class Persona {
 			break;
 		case 8:
 			newCF += 'H';
-			if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 31
-					&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 31
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
 				if (this.sesso.charAt(0) == 'F') {
-					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 9)) + 40;
+					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
 				} else {
-					newCF += this.dataDiNascita.substring(8, 9);
+					newCF += this.dataDiNascita.substring(8, 10);
 				}
 			} else {
 				return INCREABILE;
@@ -239,12 +239,12 @@ public class Persona {
 			break;
 		case 9:
 			newCF += 'I';
-			if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 30
-					&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 30
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
 				if (this.sesso.charAt(0) == 'F') {
-					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 9)) + 40;
+					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
 				} else {
-					newCF += this.dataDiNascita.substring(8, 9);
+					newCF += this.dataDiNascita.substring(8, 10);
 				}
 			} else {
 				return INCREABILE;
@@ -252,12 +252,12 @@ public class Persona {
 			break;
 		case 10:
 			newCF += 'L';
-			if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 31
-					&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 31
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
 				if (this.sesso.charAt(0) == 'F') {
-					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 9)) + 40;
+					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
 				} else {
-					newCF += this.dataDiNascita.substring(8, 9);
+					newCF += this.dataDiNascita.substring(8, 10);
 				}
 			} else {
 				return INCREABILE;
@@ -265,12 +265,12 @@ public class Persona {
 			break;
 		case 11:
 			newCF += 'M';
-			if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 30
-					&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 30
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
 				if (this.sesso.charAt(0) == 'F') {
-					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 9)) + 40;
+					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
 				} else {
-					newCF += this.dataDiNascita.substring(8, 9);
+					newCF += this.dataDiNascita.substring(8, 10);
 				}
 			} else {
 				return INCREABILE;
@@ -278,12 +278,12 @@ public class Persona {
 			break;
 		case 12:
 			newCF += 'N';
-			if (Integer.valueOf(this.dataDiNascita.substring(8, 9)) <= 31
-					&& Integer.valueOf(this.dataDiNascita.substring(8, 9)) > 0) {
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 31
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
 				if (this.sesso.charAt(0) == 'F') {
-					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 9)) + 40;
+					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
 				} else {
-					newCF += this.dataDiNascita.substring(8, 9);
+					newCF += this.dataDiNascita.substring(8, 10);
 				}
 			} else {
 				return INCREABILE;
@@ -294,10 +294,10 @@ public class Persona {
 			return INCREABILE;
 		}
 
-		//aggiunta codice comune
+		// aggiunta codice comune
 		newCF += this.cmn;
-		
-		//calcolo carattere di controllo
+
+		// calcolo carattere di controllo
 		for (i = 0; i < newCF.length(); i++) {
 			if (i % 2 == 0) {
 				switch (newCF.charAt(i)) {
