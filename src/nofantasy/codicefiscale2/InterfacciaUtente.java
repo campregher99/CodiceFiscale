@@ -6,6 +6,12 @@ import java.util.Scanner;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 
+/**
+ * 
+ * @author dchiaf
+ * @author fcampregher
+ *
+ */
 public class InterfacciaUtente {
 
 	private GestioneXML gestore = new GestioneXML();
@@ -13,10 +19,9 @@ public class InterfacciaUtente {
 	private XMLInputFactory xmlif = null;
 	private XMLStreamReader xmlr = null;
 
-	public InterfacciaUtente() {
-		
-	}
-	
+	/**
+	 * richiama i vari metodi necessari per lo svolgimento del programma
+	 */
 	public void esecuzioneAnalisi() {
 		setPaths();
 		gestore.letturaCF();
@@ -25,14 +30,15 @@ public class InterfacciaUtente {
 		scrittura("L'operazione di controllo e generazione del nuovo file è avvenuta con successo.");
 	}
 
-	// acquisizione e controllo correttezza del percorso verificando che sia un file
-	// .xml
+	/**
+	 * acquisizione e controllo correttezza del percorso verificando che si possa aprire
+	 */
 	private void setPaths() {
-		
+
 		boolean isCorretto = false;
-		
+
 		String path = letturaString("inserisci il percorso del file .xml dei codici fiscali: ");
-		
+
 		while (!isCorretto) {
 			try {
 				xmlif = XMLInputFactory.newInstance();
@@ -40,7 +46,7 @@ public class InterfacciaUtente {
 				isCorretto = true;
 			} catch (Exception e) {
 				scrittura("Il percorso del file inserito non è valido: ");
-				scrittura(e.getMessage());				
+				scrittura(e.getMessage());
 				path = letturaString("inserisci il percorso del file .xml dei codici fiscali: ");
 				isCorretto = false;
 			}
@@ -49,7 +55,7 @@ public class InterfacciaUtente {
 
 		path = letturaString("Inserisci il percorso del file .xml dei comuni: ");
 		isCorretto = false;
-		
+
 		while (!isCorretto) {
 			try {
 				xmlif = XMLInputFactory.newInstance();
@@ -57,7 +63,7 @@ public class InterfacciaUtente {
 				isCorretto = true;
 			} catch (Exception e) {
 				scrittura("Il percorso del file inserito non è valido: ");
-				scrittura(e.getMessage());				
+				scrittura(e.getMessage());
 				path = letturaString("inserisci il percorso del file .xml dei comuni: ");
 				isCorretto = false;
 			}
@@ -66,7 +72,7 @@ public class InterfacciaUtente {
 
 		path = letturaString("Inserisci il percorso del file .xml delle persone: ");
 		isCorretto = false;
-		
+
 		while (!isCorretto) {
 			try {
 				xmlif = XMLInputFactory.newInstance();
@@ -74,7 +80,7 @@ public class InterfacciaUtente {
 				isCorretto = true;
 			} catch (Exception e) {
 				scrittura("Il percorso del file inserito non è valido: ");
-				scrittura(e.getMessage());				
+				scrittura(e.getMessage());
 				path = letturaString("inserisci il percorso del file .xml delle persone: ");
 				isCorretto = false;
 			}
@@ -83,11 +89,20 @@ public class InterfacciaUtente {
 
 	}
 
+	/**
+	 * legge una stringa in ingresso dopo aver scritto un messaggio
+	 * @param msg
+	 * @return
+	 */
 	private String letturaString(String msg) {
 		System.out.print(msg);
 		return lettore.next();
 	}
-
+	
+	/**
+	 * scrive un messaggio in console
+	 * @param ms
+	 */
 	private void scrittura(String ms) {
 		System.out.println(ms);
 	}

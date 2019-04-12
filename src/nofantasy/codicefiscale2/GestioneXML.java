@@ -11,7 +11,12 @@ import javax.xml.stream.XMLStreamWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-
+/**
+ * 
+ * @author dchiaf
+ * @author fcampregher
+ *
+ */
 public class GestioneXML {
 
 	private String pathInputPersone;
@@ -24,7 +29,10 @@ public class GestioneXML {
 	private XMLStreamReader xmlr = null;
 	private XMLOutputFactory xmlof = null;
 	private XMLStreamWriter xmlw = null;
-
+	
+	/**
+	 * metodo per la lettura del file contenente i codici fiscali
+	 */
 	public void letturaCF() {
 		ArrayList<String> codiciLetti = new ArrayList<String>();
 		String lastTag = "";
@@ -70,6 +78,9 @@ public class GestioneXML {
 		codici = new GestioneCodici(codiciLetti);
 	}
 	
+	/**
+	 * legge il file contenente i dati delle persone e le passa alla classe codici dove vengono fatti i controlli
+	 */
 	public void letturaPersona() {
 		String nome = "";
 		String cognome = "";
@@ -99,6 +110,9 @@ public class GestioneXML {
 						break;
 					case XMLStreamConstants.END_ELEMENT:
 						if (xmlr.getLocalName().equals("persona")) {
+							if (codici.getPersone().size() == 996) {
+								int f = 0;
+							}
 							Persona newPersona = new Persona(nome, cognome, sesso, comune, ricercaComune(comune), data);
 							codici.aggiungiPersona(newPersona);
 						}
@@ -139,7 +153,13 @@ public class GestioneXML {
 			System.out.println(e.getMessage());
 		}
 	}
-
+	
+	/**
+	 * ricerca nel file dei comuni il comune inserito e ritorna il suo codice
+	 * 
+	 * @param comune
+	 * @return
+	 */
 	private String ricercaComune(String comune) {
 		String nomeComune = "";
 		String lastTag = "";
@@ -189,19 +209,34 @@ public class GestioneXML {
 		}
 		return "Comune non trovato";
 	}
-
+	
+	/**
+	 * setta il percorso del file contenente i dati delle persone
+	 * @param path
+	 */
 	public void setPathInputPersona(String path) {
 		pathInputPersone = path;
 	}
-
+	
+	/**
+	 * setta il percorso del file contenente i comuni
+	 * @param path
+	 */
 	public void setPathComuni(String path) {
 		pathComuni = path;
 	}
-
+	
+	/**
+	 * setta il percorso del file contenente i codici fiscali
+	 * @param path
+	 */
 	public void setPathCF(String path) {
 		pathCF = path;
 	}
-
+	
+	/**
+	 * genera il file in uscita con tutte le persone ed i loro dati e la lista di codici invalidi e quella dei codici spaiati
+	 */
 	public void generaOutput() {//eliminati perchè li può prendere da solo da codici
 		try {
 			xmlof = XMLOutputFactory.newInstance();

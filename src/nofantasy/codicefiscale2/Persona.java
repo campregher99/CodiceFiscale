@@ -1,5 +1,11 @@
 package nofantasy.codicefiscale2;
 
+/**
+ * 
+ * @author dchiaf
+ * @author fcampregher
+ *
+ */
 public class Persona {
 
 	private static final String INCREABILE = "INCREABILE";
@@ -11,16 +17,19 @@ public class Persona {
 	private String dataDiNascita; // AAAA/MM/GG
 	private String cF;
 
-	public Persona(Persona newPersona) {
-		this.nome = newPersona.getNome();
-		this.cognome = newPersona.getCognome();
-		this.sesso = newPersona.getSesso();
-		this.comune = newPersona.getComune();
-		this.cmn = newPersona.getCmn();
-		this.dataDiNascita = newPersona.getDataDiNascita();
-		this.cF = calcoloCF();
-	}
-
+	/**
+	 * Costruttore che inizializza l'istanza persona che richiede in ingresso tutti
+	 * iparametri tranne il codice fiscale che viene autogenerato.
+	 * 
+	 * @param nome
+	 * @param cognome
+	 * @param sesso
+	 * @param comune
+	 * @param cmn
+	 * il parametro cmn è il codice riferito al comune
+	 * @param dataDiNascita
+	 * la data di nascita nel formato AAAA/MM/GG
+	 */
 	public Persona(String nome, String cognome, String sesso, String comune, String cmn, String dataDiNascita) {
 		this.nome = nome;
 		this.cognome = cognome;
@@ -30,39 +39,75 @@ public class Persona {
 		this.dataDiNascita = dataDiNascita;
 		this.cF = calcoloCF();
 	}
-
+	
+	/**
+	 * setta il valore del codice fiscale
+	 * @param cF
+	 */
 	public void setCF(String cF) {
 		this.cF = cF;
 	}
-
+	
+	/**
+	 * ritorna il valore del nome
+	 * @return
+	 */
 	public String getNome() {
 		return nome;
 	}
-
+	
+	/**
+	 * ritorna il valore del cognome
+	 * @return
+	 */
 	public String getCognome() {
 		return cognome;
 	}
-
+	
+	/**
+	 * ritorna il valore del sesso
+	 * @return
+	 */
 	public String getSesso() {
 		return sesso;
 	}
-
+	
+	/**
+	 * ritorna il valore del comune
+	 * @return
+	 */
 	public String getComune() {
 		return comune;
 	}
-
+	
+	/**
+	 * ritorna il valore del codice del comune
+	 * @return
+	 */
 	public String getCmn() {
 		return cmn;
 	}
-
+	
+	/**
+	 * ritorna il valore della data di nascita
+	 * @return
+	 */
 	public String getDataDiNascita() {
 		return dataDiNascita;
 	}
-
+	
+	/**
+	 * ritorna il valore del codice fiscale
+	 * @return
+	 */
 	public String getCF() {
 		return cF;
 	}
-
+	
+	/**
+	 * calcola il valore del codice fiscale
+	 * @return
+	 */
 	private String calcoloCF() {
 		String newCF = "";
 		int i = 0, c = 0, dispari = 0, pari = 0;
@@ -199,7 +244,7 @@ public class Persona {
 			}
 			break;
 		case 6:
-			newCF += 'F';
+			newCF += 'H';
 			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 30
 					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
 				if (this.sesso.charAt(0) == 'F') {
@@ -212,45 +257,6 @@ public class Persona {
 			}
 			break;
 		case 7:
-			newCF += 'G';
-			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 31
-					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
-				if (this.sesso.charAt(0) == 'F') {
-					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
-				} else {
-					newCF += this.dataDiNascita.substring(8, 10);
-				}
-			} else {
-				return INCREABILE;
-			}
-			break;
-		case 8:
-			newCF += 'H';
-			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 31
-					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
-				if (this.sesso.charAt(0) == 'F') {
-					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
-				} else {
-					newCF += this.dataDiNascita.substring(8, 10);
-				}
-			} else {
-				return INCREABILE;
-			}
-			break;
-		case 9:
-			newCF += 'I';
-			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 30
-					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
-				if (this.sesso.charAt(0) == 'F') {
-					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
-				} else {
-					newCF += this.dataDiNascita.substring(8, 10);
-				}
-			} else {
-				return INCREABILE;
-			}
-			break;
-		case 10:
 			newCF += 'L';
 			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 31
 					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
@@ -263,8 +269,47 @@ public class Persona {
 				return INCREABILE;
 			}
 			break;
-		case 11:
+		case 8:
 			newCF += 'M';
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 31
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
+				if (this.sesso.charAt(0) == 'F') {
+					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
+				} else {
+					newCF += this.dataDiNascita.substring(8, 10);
+				}
+			} else {
+				return INCREABILE;
+			}
+			break;
+		case 9:
+			newCF += 'P';
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 30
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
+				if (this.sesso.charAt(0) == 'F') {
+					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
+				} else {
+					newCF += this.dataDiNascita.substring(8, 10);
+				}
+			} else {
+				return INCREABILE;
+			}
+			break;
+		case 10:
+			newCF += 'R';
+			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 31
+					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
+				if (this.sesso.charAt(0) == 'F') {
+					newCF += Integer.valueOf(this.dataDiNascita.substring(8, 10)) + 40;
+				} else {
+					newCF += this.dataDiNascita.substring(8, 10);
+				}
+			} else {
+				return INCREABILE;
+			}
+			break;
+		case 11:
+			newCF += 'S';
 			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 30
 					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
 				if (this.sesso.charAt(0) == 'F') {
@@ -277,7 +322,7 @@ public class Persona {
 			}
 			break;
 		case 12:
-			newCF += 'N';
+			newCF += 'T';
 			if (Integer.valueOf(this.dataDiNascita.substring(8, 10)) <= 31
 					&& Integer.valueOf(this.dataDiNascita.substring(8, 10)) > 0) {
 				if (this.sesso.charAt(0) == 'F') {
