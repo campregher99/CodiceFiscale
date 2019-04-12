@@ -1,6 +1,7 @@
 package nofantasy.codicefiscale2;
 
 import java.io.FileInputStream;
+
 import java.util.Scanner;
 
 import javax.xml.stream.XMLInputFactory;

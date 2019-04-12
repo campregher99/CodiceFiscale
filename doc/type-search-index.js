@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"nofantasy.codicefiscale2","l":"GestioneCodici"},{"p":"nofantasy.codicefiscale2","l":"GestioneXML"},{"p":"nofantasy.codicefiscale2","l":"InterfacciaUtente"},{"p":"nofantasy.codicefiscale2","l":"Main"},{"p":"nofantasy.codicefiscale2","l":"Persona"}]

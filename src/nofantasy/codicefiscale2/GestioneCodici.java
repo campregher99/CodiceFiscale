@@ -37,7 +37,7 @@ public class GestioneCodici {
 	/**
 	 * ritorna l'araylist dei codici fiscali invalidi
 	 * 
-	 * @return ArrayList<String>
+	 * @return 
 	 */
 	public ArrayList<String> getCodiciFiscaliInvalidi() {
 		return codiciFiscaliInvalidi;
@@ -46,7 +46,7 @@ public class GestioneCodici {
 	/**
 	 * ritorna l'arraylist delle persone inserite
 	 * 
-	 * @return ArrayList<Persona>
+	 * @return 
 	 */
 	public ArrayList<Persona> getPersone() {
 		return persone;
@@ -55,7 +55,7 @@ public class GestioneCodici {
 	/**
 	 * ritorna l'arraylist dei codici fiscali spaiati
 	 * 
-	 * @return ArrayList<String>
+	 * @return 
 	 */
 	public ArrayList<String> getCodiciFiscaliSpaiati() {
 		return codiciFiscaliSpaiati;
